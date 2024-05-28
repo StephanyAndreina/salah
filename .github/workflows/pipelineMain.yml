@@ -8,9 +8,9 @@ on:
  
 jobs:
   build:
-    runs-on: ubuntu-latest
+   runs-on: ubuntu-latest
  
-    steps:
+   steps:
     - name: Checkout
       uses: actions/checkout@v2
  
@@ -30,4 +30,17 @@ jobs:
  
     - name: Resultados
       run: coverage report
-
+      
+    - uses: actions/checkout@v3
+      name: Check out code
+      
+    - uses: mr-smithers-excellent/docker-build-push@v6
+      name: Build & push Docker image
+      
+      with:
+       image: repo/image
+       tags: v1, latest
+       registry: registry-url.io
+       dockerfile: Dockerfile.ci
+       username: ${{ secrets.DOCKER_USERNAME }}
+       password: ${{ secrets.DOCKER_PASSWORD }}
