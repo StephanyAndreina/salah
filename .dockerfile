@@ -1,9 +1,11 @@
-FROM flask
+FROM python;latest
 
-WORKDIR /salah
+WORKDIR /app
 
 COPY . .
 
-EXPOSE 8080
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["node", "pratica"] 
+RUN pip install 
+
+
